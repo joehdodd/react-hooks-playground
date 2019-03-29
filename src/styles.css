@@ -1,0 +1,54 @@
+body {
+  margin: 0 auto;
+  font-family: "Inconsolata", monospace;
+  color: rgb(171, 178, 191);
+  background: #e8ecf4;
+}
+
+.data-container {
+  overflow: hidden;
+  overflow-y: scroll;
+  min-height: 400px;
+  max-height: 400px;
+  padding: 16px;
+}
+
+.row-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 50%);
+  padding: 8px;
+}
+
+.row {
+  display: grid;
+  grid-auto-flow: row;
+  justify-content: center;
+  align-items: center;
+  grid-gap: 8px;
+  margin: 4px;
+  border-radius: 4px;
+  padding: 16px;
+  background-color: #fdfdfd;
+  box-shadow: 4px 6px 14px 6px rgba(0, 0, 0, 0.15);
+}
+
+.row > img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.row:hover {
+  cursor: pointer;
+}
+
+.row-info {
+  display: grid;
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .row-container {
+    grid-template-columns: repeat(auto-fill, 25%);
+  }
+}
