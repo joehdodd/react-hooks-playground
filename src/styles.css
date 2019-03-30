@@ -5,18 +5,51 @@ body {
   background: #e8ecf4;
 }
 
+.page-container {
+  background: transparent;
+  padding: 16px;
+}
+
+.search-container {
+  position: fixed;
+  background-color: transparent;
+}
+
+.search-container > input {
+  font-family: "Inconsolata", monospace;
+  color: rgb(171, 178, 191);
+  border: transparent;
+  background: #c8ccd3;
+  color: rgb(43, 43, 43);
+  font-size: 18px;
+  border-radius: 4px;
+  width: 175px;
+  height: 35px;
+  margin: 0 4px;
+}
+
+.search-container > button {
+  font-family: "Inconsolata", monospace;
+  color: rgb(43, 43, 43);
+  height: 35px;
+  border: none;
+  font-size: 18px;
+  border-radius: 4px;
+}
+
 .data-container {
   overflow: hidden;
   overflow-y: scroll;
   min-height: 400px;
   max-height: 400px;
-  padding: 16px;
 }
 
 .row-container {
+  width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 50%);
-  padding: 8px;
+  justify-content: space-between;
+  grid-gap: 8px;
+  grid-template-columns: repeat(auto-fit, 50%);
 }
 
 .row {
@@ -24,8 +57,6 @@ body {
   grid-auto-flow: row;
   justify-content: center;
   align-items: center;
-  grid-gap: 8px;
-  margin: 4px;
   border-radius: 4px;
   padding: 16px;
   background-color: #fdfdfd;
@@ -49,6 +80,6 @@ body {
 
 @media screen and (min-width: 768px) {
   .row-container {
-    grid-template-columns: repeat(auto-fill, 25%);
+    grid-template-columns: repeat(auto-fit, 22.5%);
   }
 }

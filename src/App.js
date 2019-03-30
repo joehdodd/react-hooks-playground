@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 import "./styles.css";
 
@@ -9,7 +10,7 @@ const getRandomNumber = () => {
 };
 
 const Row = React.memo(({ setShowData, gif, selected }) => {
-  console.log("row re-rendered!", gif.id);
+  // console.log("row re-rendered!", gif.id);
   return (
     <div
       className="row"
@@ -48,6 +49,16 @@ const getRandomSearchString = () => {
 
 const gifReducer = (state, action) => {
   switch (action.type) {
+    case "set-query":
+      return {
+        ...state,
+        searchQuery: action.searchQuery
+      };
+    case "set-input-value":
+      return {
+        ...state,
+        inputValue: action.inputValue
+      };
     case "set-gifs":
       return {
         ...state,
@@ -66,29 +77,52 @@ const gifReducer = (state, action) => {
   }
 };
 
-const App = props => {
+const App = () => {
   getRandomNumber();
-  const KEY = "OJ3Y53fPIs7cHSRfaYqxjIpcXy8Bgv61";
   const [state, dispatch] = React.useReducer(gifReducer, {
     gifs: [],
     selectedData: null,
-    selectedRow: null
+    selectedRow: null,
+    inputValue: "",
+    searchQuery: getRandomSearchString()
   });
   React.useEffect(() => {
-    const getGifs = async search => {
-      const searchString = search.split(" ").join("+");
-      const { data: fetchedGifs } = await fetch(
-        `https://api.giphy.com/v1/gifs/search?q=${searchString}&api_key=${KEY}&limit=4`
-      ).then(res => res.json());
+    const getGifs = async () => {
+      const urlQuery = state.searchQuery.split(" ").join("+");
+      const url = `https://api.giphy.com/v1/gifs/search?q=${urlQuery}&api_key=OJ3Y53fPIs7cHSRfaYqxjIpcXy8Bgv61&limit=8`;
+      const { data: fetchedGifs } = await axios.get(url).then(res => res.data);
       return dispatch({ type: "set-gifs", gifs: fetchedGifs });
     };
-    getGifs(getRandomSearchString());
-  }, []);
+    getGifs();
+  }, [state.searchQuery]);
   const showData = React.useCallback((data, id) => {
     dispatch({ type: "select-gif", selectedData: data, id });
   }, []);
   return (
     <div className="page-container">
+      <div className="search-container">
+        <input
+          type="text"
+          value={state.inputValue}
+          onChange={e =>
+            dispatch({
+              type: "set-input-value",
+              inputValue: e.target.value
+            })
+          }
+        />
+        <button
+          type="submit"
+          onClick={() =>
+            dispatch({
+              type: "set-query",
+              searchQuery: state.inputValue
+            })
+          }
+        >
+          Search
+        </button>
+      </div>
       <div className="data-container">
         {!!state.selectedData && (
           <pre>{JSON.stringify(state.selectedData, null, 2)}</pre>
