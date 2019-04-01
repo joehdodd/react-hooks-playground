@@ -1,47 +1,52 @@
 body {
   margin: 0 auto;
   font-family: "Inconsolata", monospace;
-  color: rgb(171, 178, 191);
+  color: #abb2bf;
   background: #e8ecf4;
+}
+
+button {
+  font-family: "Inconsolata", monospace;
+  color: #f7f7f7;
+  background-color: #727d93;
+  height: 35px;
+  border: none;
+  font-size: 18px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #9ca4b3;
+}
+
+button:focus {
+  outline: none;
 }
 
 .page-container {
   background: transparent;
   padding: 16px;
-}
-
-.search-container {
-  position: fixed;
-  background-color: transparent;
+  display: grid;
+  grid-gap: 16px;
 }
 
 .search-container > input {
   font-family: "Inconsolata", monospace;
-  color: rgb(171, 178, 191);
+  color: #abb2bf;
   border: transparent;
   background: #c8ccd3;
-  color: rgb(43, 43, 43);
+  color: #2b2b2b;
   font-size: 18px;
   border-radius: 4px;
   width: 175px;
   height: 35px;
-  margin: 0 4px;
-}
-
-.search-container > button {
-  font-family: "Inconsolata", monospace;
-  color: rgb(43, 43, 43);
-  height: 35px;
-  border: none;
-  font-size: 18px;
-  border-radius: 4px;
+  margin-right: 4px;
 }
 
 .data-container {
   overflow: hidden;
   overflow-y: scroll;
-  min-height: 400px;
-  max-height: 400px;
 }
 
 .row-container {
@@ -50,6 +55,11 @@ body {
   justify-content: space-between;
   grid-gap: 8px;
   grid-template-columns: repeat(auto-fit, 50%);
+}
+
+.row-container > a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .row {
@@ -61,6 +71,11 @@ body {
   padding: 16px;
   background-color: #fdfdfd;
   box-shadow: 4px 6px 14px 6px rgba(0, 0, 0, 0.15);
+  transition: transform .25s;
+}
+
+.row:hover {
+  transform: scale(1.05);
 }
 
 .row > img {
@@ -76,6 +91,14 @@ body {
 .row-info {
   display: grid;
   text-align: center;
+}
+
+.gif-id-container {
+  padding: 8px;
+}
+
+.gif-id-container:hover {
+  color: #888e98;
 }
 
 @media screen and (min-width: 768px) {
