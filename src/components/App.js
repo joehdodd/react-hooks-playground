@@ -2,6 +2,7 @@ import React from "react";
 import { Link, Route } from "react-router-dom";
 import Search from "./Search";
 import Row from "./Row";
+import Details from "./Details";
 import axios from "axios";
 
 import "../styles.css";
@@ -65,6 +66,7 @@ const App = () => {
       const urlQuery = state.searchQuery.split(" ").join("+");
       const url = `https://api.giphy.com/v1/gifs/search?q=${urlQuery}&api_key=OJ3Y53fPIs7cHSRfaYqxjIpcXy8Bgv61&limit=8`;
       const { data: fetchedGifs } = await axios.get(url).then(res => res.data);
+      console.log(fetchedGifs);
       return dispatch({ type: "set-gifs", gifs: fetchedGifs });
     };
     getGifs();
@@ -73,10 +75,6 @@ const App = () => {
     e.preventDefault();
     dispatch({ type: "select-gif", selectedData: data, id });
   }, []);
-  // const showData = (e, data, id) => {
-  //   e.preventDefault();
-  //   dispatch({ type: "select-gif", selectedData: data, id });
-  // };
   return (
     <div className="page-container">
       <Search
@@ -87,18 +85,19 @@ const App = () => {
             inputValue: e.target.value
           })
         }
-        onClick={() =>
+        onClick={e => {
+          e.preventDefault();
           dispatch({
             type: "set-query",
             searchQuery: state.inputValue
-          })
-        }
+          });
+        }}
       />
       <Route
         path="/"
         exact
         render={() => (
-          <div className="row-container">
+          <div className="rows-container">
             {!!state.gifs.length &&
               state.gifs.map(gif => (
                 <Row
@@ -114,18 +113,9 @@ const App = () => {
       <Route
         path={"/:gifId"}
         render={({ match }) => (
-          <div className="data-container">
-            <Link to="/">
-              <button>Back</button>
-            </Link>
-            <pre>
-              {JSON.stringify(
-                state.gifs.find(gif => gif.id === match.params.gifId),
-                null,
-                2
-              )}
-            </pre>
-          </div>
+          <Details
+            gif={state.gifs.find(gif => gif.id === match.params.gifId)}
+          />
         )}
       />
     </div>

@@ -6,6 +6,7 @@ body {
 }
 
 button {
+  padding: 2px 4px;
   font-family: "Inconsolata", monospace;
   color: #f7f7f7;
   background-color: #727d93;
@@ -24,17 +25,12 @@ button:focus {
   outline: none;
 }
 
-.page-container {
-  background: transparent;
-  padding: 16px;
-  display: grid;
-  grid-gap: 16px;
-}
-
-.search-container > input {
+input {
+  padding: 0px 4px;
   font-family: "Inconsolata", monospace;
   color: #abb2bf;
-  border: transparent;
+  border: none;
+  outline: none;
   background: #c8ccd3;
   color: #2b2b2b;
   font-size: 18px;
@@ -44,12 +40,27 @@ button:focus {
   margin-right: 4px;
 }
 
+img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.page-container {
+  background: transparent;
+  padding: 16px;
+  display: grid;
+  grid-gap: 16px;
+  grid-auto-flow: row;
+}
+
 .data-container {
   overflow: hidden;
   overflow-y: scroll;
 }
 
-.row-container {
+.rows-container {
   width: 100%;
   display: grid;
   justify-content: space-between;
@@ -57,35 +68,30 @@ button:focus {
   grid-template-columns: repeat(auto-fit, 50%);
 }
 
-.row-container > a {
+.rows-container > a {
   text-decoration: none;
   color: inherit;
 }
 
-.row {
-  display: grid;
-  grid-auto-flow: row;
-  justify-content: center;
-  align-items: center;
+.card-wrapper {
+  max-width: 100%;
   border-radius: 4px;
   padding: 16px;
   background-color: #fdfdfd;
   box-shadow: 4px 6px 14px 6px rgba(0, 0, 0, 0.15);
-  transition: transform .25s;
+  transition: transform 0.25s;
 }
 
-.row:hover {
+.hover:hover {
+  cursor: pointer;
   transform: scale(1.05);
 }
 
-.row > img {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-}
-
-.row:hover {
-  cursor: pointer;
+.row-container {
+  display: grid;
+  grid-auto-flow: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .row-info {
@@ -101,8 +107,13 @@ button:focus {
   color: #888e98;
 }
 
+.details-container {
+  display: grid;
+  grid-auto-flow: row;
+}
+
 @media screen and (min-width: 768px) {
-  .row-container {
+  .rows-container {
     grid-template-columns: repeat(auto-fit, 22.5%);
   }
 }
