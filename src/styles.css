@@ -1,14 +1,13 @@
 body {
   margin: 0 auto;
   font-family: "Inconsolata", monospace;
-  color: #abb2bf;
-  background: #e8ecf4;
+  transition: background 0.5s;
 }
 
 button {
   padding: 2px 4px;
   font-family: "Inconsolata", monospace;
-  color: #f7f7f7;
+  color: #eee;
   background-color: #727d93;
   height: 35px;
   border: none;
@@ -50,9 +49,13 @@ img {
 .page-container {
   background: transparent;
   padding: 16px;
-  display: grid;
-  grid-gap: 16px;
-  grid-auto-flow: row;
+  height: 100vh;
+  margin: 0;
+  transition: background 0.5s;
+}
+
+.search-container {
+  margin: 8px 0px;
 }
 
 .data-container {
@@ -64,22 +67,21 @@ img {
   width: 100%;
   display: grid;
   justify-content: space-between;
-  grid-gap: 8px;
-  grid-template-columns: repeat(auto-fit, 50%);
-}
-
-.rows-container > a {
-  text-decoration: none;
-  color: inherit;
+  grid-gap: 5%;
+  grid-template-columns: repeat(auto-fit, 45%);
 }
 
 .card-wrapper {
   max-width: 100%;
   border-radius: 4px;
   padding: 16px;
-  background-color: #fdfdfd;
   box-shadow: 4px 6px 14px 6px rgba(0, 0, 0, 0.15);
-  transition: transform 0.25s;
+  transition: all 0.25s;
+}
+
+.card-wrapper > a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .hover:hover {
@@ -114,6 +116,6 @@ img {
 
 @media screen and (min-width: 768px) {
   .rows-container {
-    grid-template-columns: repeat(auto-fit, 22.5%);
+    grid-template-columns: repeat(auto-fit, 25%);
   }
 }

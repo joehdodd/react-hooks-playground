@@ -3,15 +3,16 @@ import { Link } from "react-router-dom";
 
 export default ({ gif }) => {
   return (
-    <div className="card-wrapper">
-      <div className="details-container">
-        <Link to="/">
-          <button>Back</button>
-        </Link>
-        <h2>{gif.title}</h2>
-        <img className="gif-image" src={gif.images.original.url} alt={gif.title} />
-      </div>
-      {/* <pre>{JSON.stringify(gif, null, 2)}</pre> */}
+    <div className="details-container">
+      <Link to="/">
+        <button>Back</button>
+      </Link>
+      <h2>{gif.title}</h2>
+      <img
+        className="gif-image"
+        src={gif.images.original.url}
+        alt={gif.title}
+      />
     </div>
   );
 };

@@ -1,5 +1,8 @@
 import React from "react";
-import { Link, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
+import { ThemeContext } from "./ThemeContext";
+import gifReducer from "../gifReducer";
+import Card from "./Card";
 import Search from "./Search";
 import Row from "./Row";
 import Details from "./Details";
@@ -12,7 +15,7 @@ const getRandomSearchString = () => {
   const map = {
     0: "tennessee",
     1: "tacos",
-    2: "new york city",
+    2: "smoky mountains",
     3: "ireland",
     4: "airplanes",
     5: "doge",
@@ -23,37 +26,8 @@ const getRandomSearchString = () => {
   return map[randomNumber()];
 };
 
-const gifReducer = (state, action) => {
-  switch (action.type) {
-    case "set-query":
-      return {
-        ...state,
-        searchQuery: action.searchQuery
-      };
-    case "set-input-value":
-      return {
-        ...state,
-        inputValue: action.inputValue
-      };
-    case "set-gifs":
-      return {
-        ...state,
-        gifs: action.gifs
-      };
-    case "select-gif":
-      return {
-        ...state,
-        selectedData: action.selectedData,
-        selectedRow: action.id
-      };
-    default:
-      return {
-        ...state
-      };
-  }
-};
-
 const App = () => {
+  const theme = React.useContext(ThemeContext);
   const [state, dispatch] = React.useReducer(gifReducer, {
     gifs: [],
     selectedData: null,
@@ -64,7 +38,7 @@ const App = () => {
   React.useEffect(() => {
     const getGifs = async () => {
       const urlQuery = state.searchQuery.split(" ").join("+");
-      const url = `https://api.giphy.com/v1/gifs/search?q=${urlQuery}&api_key=OJ3Y53fPIs7cHSRfaYqxjIpcXy8Bgv61&limit=8`;
+      const url = `https://api.giphy.com/v1/gifs/search?q=${urlQuery}&api_key=OJ3Y53fPIs7cHSRfaYqxjIpcXy8Bgv61&limit=4`;
       const { data: fetchedGifs } = await axios.get(url).then(res => res.data);
       console.log(fetchedGifs);
       return dispatch({ type: "set-gifs", gifs: fetchedGifs });
@@ -76,7 +50,15 @@ const App = () => {
     dispatch({ type: "select-gif", selectedData: data, id });
   }, []);
   return (
-    <div className="page-container">
+    <div
+      className="page-container"
+      style={{
+        color: theme.currentTheme.textColor
+      }}
+    >
+      <button type="button" onClick={() => theme.toggleTheme()}>
+        Toggle Theme
+      </button>
       <Search
         inputValue={state.inputValue}
         onChange={e =>
@@ -100,12 +82,14 @@ const App = () => {
           <div className="rows-container">
             {!!state.gifs.length &&
               state.gifs.map(gif => (
-                <Row
-                  key={gif.id}
-                  gif={gif}
-                  setShowData={showData}
-                  selected={gif.id === state.selectedRow}
-                />
+                <Card className="hover" theme={theme.currentTheme}>
+                  <Row
+                    key={gif.id}
+                    gif={gif}
+                    setShowData={showData}
+                    selected={state.selectedRow === gif.id}
+                  />
+                </Card>
               ))}
           </div>
         )}
@@ -113,9 +97,11 @@ const App = () => {
       <Route
         path={"/:gifId"}
         render={({ match }) => (
-          <Details
-            gif={state.gifs.find(gif => gif.id === match.params.gifId)}
-          />
+          <Card theme={theme.currentTheme}>
+            <Details
+              gif={state.gifs.find(gif => gif.id === match.params.gifId)}
+            />
+          </Card>
         )}
       />
     </div>

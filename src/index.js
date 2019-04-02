@@ -2,11 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import App from "./components/App";
+import { ThemeProvider } from "./components/ThemeContext";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
   </BrowserRouter>,
   document.getElementById("root")
 );
