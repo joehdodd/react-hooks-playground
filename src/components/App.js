@@ -2,6 +2,8 @@ import React from "react";
 import { Route } from "react-router-dom";
 import { ThemeContext } from "./ThemeContext";
 import gifReducer from "../gifReducer";
+import getRandomSearchString from "../getRandomSearchString";
+import ThemeButton from "./ThemeButton";
 import Card from "./Card";
 import Search from "./Search";
 import Row from "./Row";
@@ -9,22 +11,6 @@ import Details from "./Details";
 import axios from "axios";
 
 import "../styles.css";
-
-const getRandomSearchString = () => {
-  const randomNumber = () => Math.floor(Math.random() * (8 - 0 + 1)) + 0;
-  const map = {
-    0: "tennessee",
-    1: "tacos",
-    2: "smoky mountains",
-    3: "ireland",
-    4: "airplanes",
-    5: "doge",
-    6: "kung fu",
-    7: "explosions",
-    8: "kazoo kid"
-  };
-  return map[randomNumber()];
-};
 
 const App = () => {
   const theme = React.useContext(ThemeContext);
@@ -56,9 +42,9 @@ const App = () => {
         color: theme.currentTheme.textColor
       }}
     >
-      <button type="button" onClick={() => theme.toggleTheme()}>
-        Toggle Theme
-      </button>
+      <ThemeButton type="button" onClick={() => theme.toggleTheme()}>
+        Go {theme.currentTheme.toggleKey}
+      </ThemeButton>
       <Search
         inputValue={state.inputValue}
         onChange={e =>
