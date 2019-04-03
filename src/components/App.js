@@ -68,9 +68,8 @@ const App = () => {
           <div className="rows-container">
             {!!state.gifs.length &&
               state.gifs.map(gif => (
-                <Card className="hover" theme={theme.currentTheme}>
+                <Card className="hover" theme={theme.currentTheme} key={gif.id}>
                   <Row
-                    key={gif.id}
                     gif={gif}
                     setShowData={showData}
                     selected={state.selectedRow === gif.id}

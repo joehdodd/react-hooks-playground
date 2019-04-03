@@ -36,14 +36,15 @@ const ThemeProvider = ({ children }) => {
 
   const toggleTheme = () => {
     const theme = currentTheme === themes.dark ? themes.light : themes.dark;
-    console.log("toggled theme in toggleTheme", theme);
     localStorage.setItem("theme", JSON.stringify(theme));
     setTheme(theme);
   };
 
   React.useEffect(() => {
     const theme = JSON.parse(localStorage.getItem("theme"));
-    setTheme(theme);
+    if (theme) {
+      setTheme(theme);
+    }
   }, []);
 
   React.useEffect(() => {
