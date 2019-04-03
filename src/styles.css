@@ -67,7 +67,7 @@ img {
   width: 100%;
   display: grid;
   justify-content: space-between;
-  grid-gap: 5%;
+  grid-gap: 8px;
   grid-template-columns: repeat(auto-fit, 45%);
 }
 
@@ -116,6 +116,6 @@ img {
 
 @media screen and (min-width: 768px) {
   .rows-container {
-    grid-template-columns: repeat(auto-fit, 25%);
+    grid-template-columns: repeat(auto-fit, 20%);
   }
 }

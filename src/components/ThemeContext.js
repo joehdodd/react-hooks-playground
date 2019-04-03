@@ -27,7 +27,7 @@ const themes = {
 };
 
 const ThemeContext = React.createContext({
-  theme: { ...themes.dark },
+  theme: {},
   toggleTheme: () => {}
 });
 
@@ -35,10 +35,16 @@ const ThemeProvider = ({ children }) => {
   const [currentTheme, setTheme] = React.useState(themes.dark);
 
   const toggleTheme = () => {
-    setTheme(currentTheme =>
-      currentTheme === themes.dark ? themes.light : themes.dark
-    );
+    const theme = currentTheme === themes.dark ? themes.light : themes.dark;
+    console.log("toggled theme in toggleTheme", theme);
+    localStorage.setItem("theme", JSON.stringify(theme));
+    setTheme(theme);
   };
+
+  React.useEffect(() => {
+    const theme = JSON.parse(localStorage.getItem("theme"));
+    setTheme(theme);
+  }, []);
 
   React.useEffect(() => {
     document.body.style.backgroundColor = currentTheme.pageBackground;
