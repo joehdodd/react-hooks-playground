@@ -34,11 +34,11 @@ const ThemeContext = React.createContext({
 const ThemeProvider = ({ children }) => {
   const [currentTheme, setTheme] = React.useState(themes.dark);
 
-  const toggleTheme = () => {
+  const toggleTheme = React.useCallback(() => {
     const theme = currentTheme === themes.dark ? themes.light : themes.dark;
     localStorage.setItem("theme", JSON.stringify(theme));
     setTheme(theme);
-  };
+  }, [currentTheme]);
 
   React.useEffect(() => {
     const theme = JSON.parse(localStorage.getItem("theme"));
