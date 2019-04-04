@@ -6,7 +6,7 @@ import getRandomSearchString from "../getRandomSearchString";
 import ThemeButton from "./ThemeButton";
 import Card from "./Card";
 import Search from "./Search";
-import Row from "./Row";
+import GifRow from "./GifRow";
 import Details from "./Details";
 import axios from "axios";
 
@@ -24,7 +24,7 @@ const App = () => {
   React.useEffect(() => {
     const getGifs = async () => {
       const urlQuery = state.searchQuery.split(" ").join("+");
-      const url = `https://api.giphy.com/v1/gifs/search?q=${urlQuery}&api_key=OJ3Y53fPIs7cHSRfaYqxjIpcXy8Bgv61&limit=4`;
+      const url = `https://api.giphy.com/v1/gifs/search?q=${urlQuery}&api_key=OJ3Y53fPIs7cHSRfaYqxjIpcXy8Bgv61&limit=8`;
       const { data: fetchedGifs } = await axios.get(url).then(res => res.data);
       console.log(fetchedGifs);
       return dispatch({ type: "set-gifs", gifs: fetchedGifs });
@@ -66,16 +66,7 @@ const App = () => {
         exact
         render={() => (
           <div className="rows-container">
-            {!!state.gifs.length &&
-              state.gifs.map(gif => (
-                <Card className="hover" theme={theme.currentTheme} key={gif.id}>
-                  <Row
-                    gif={gif}
-                    setShowData={showData}
-                    selected={state.selectedRow === gif.id}
-                  />
-                </Card>
-              ))}
+            {!!state.gifs.length && state.gifs.map(gif => <GifRow gif={gif} />)}
           </div>
         )}
       />

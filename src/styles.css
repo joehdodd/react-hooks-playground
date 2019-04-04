@@ -67,8 +67,8 @@ img {
   width: 100%;
   display: grid;
   justify-content: space-between;
-  grid-gap: 8px;
-  grid-template-columns: repeat(auto-fit, 45%);
+  grid-gap: 4px;
+  grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));
 }
 
 .card-wrapper {
@@ -87,6 +87,28 @@ img {
 .hover:hover {
   cursor: pointer;
   transform: scale(1.05);
+}
+
+.gif-row {
+  background-size: cover;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.gif-info {
+  position: absolute;
+  top: -75px;
+  width: 100%;
+  height: 50px;
+  padding: 8px;
+  color: #fff;
+  background: linear-gradient(rgba(0, 0, 0, 0.85), transparent);
+  transition: top 0.5s;
+}
+
+.gif-row:hover > .gif-info {
+  top: 0px;
 }
 
 .row-container {
@@ -114,8 +136,8 @@ img {
   grid-auto-flow: row;
 }
 
-@media screen and (min-width: 768px) {
+/* @media screen and (min-width: 768px) {
   .rows-container {
     grid-template-columns: repeat(auto-fit, 20%);
   }
-}
+} */
