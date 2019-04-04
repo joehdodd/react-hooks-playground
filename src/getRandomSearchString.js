@@ -1,15 +1,15 @@
 export default () => {
   const randomNumber = () => Math.floor(Math.random() * (8 - 0 + 1)) + 0;
   const map = {
-    0: "tennessee",
-    1: "tacos",
-    2: "smoky mountains",
-    3: "ireland",
-    4: "airplanes",
-    5: "doge",
-    6: "kung fu",
-    7: "explosions",
-    8: "kazoo kid"
+    0: "northern lights",
+    1: "stars",
+    2: "scotland",
+    3: "mountains",
+    4: "earth",
+    5: "star wars",
+    6: "the matrix",
+    7: "waterfalls",
+    8: "nature"
   };
   return map[randomNumber()];
 };
